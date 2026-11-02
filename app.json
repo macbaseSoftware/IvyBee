@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "Ivybee",
+    "slug": "ivybee",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/6.png",
+    "scheme": "ivybee",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F2C94C"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.danieldanieldaniel.IvyBrilliance"
+    },
+    "web": {
+      "output": "static",
+      "favicon": "./assets/images/6.png"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/images/5.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#171713",
+          "dark": {
+            "backgroundColor": "#171713"
+          }
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "52ab7751-7589-4e49-8386-a2ff49b2c2a6"
+      }
+    },
+    "owner": "danieldanieldaniel"
+  }
+}
