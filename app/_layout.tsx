@@ -2,6 +2,7 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { setAuthToken } from '../services/api';
+import { enablePushNotifications } from '../services/notifications';
 import { AuthProvider, useAuth } from '../store/authStore';
 
 function RootNavigator() {
@@ -9,6 +10,7 @@ function RootNavigator() {
 
   useEffect(() => {
     setAuthToken(token);
+    if (token) enablePushNotifications().catch(() => undefined);
   }, [token]);
 
   return (
@@ -18,8 +20,11 @@ function RootNavigator() {
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="course/[id]" />
-        <Stack.Screen name="lesson/[id]" />
+        <Stack.Screen name="group/[id]" />
+        <Stack.Screen name="games/index" />
+        <Stack.Screen name="games/memory" />
+        <Stack.Screen name="games/sudoku" />
+        <Stack.Screen name="games/math" />
       </Stack>
     </>
   );

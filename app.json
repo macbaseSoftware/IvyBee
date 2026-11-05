@@ -25,21 +25,22 @@
     },
     "plugins": [
       "expo-router",
+      "expo-notifications",
       [
         "expo-splash-screen",
         {
           "image": "./assets/images/5.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#171713",
+          "backgroundColor": "#F2C94C",
           "dark": {
-            "backgroundColor": "#171713"
+            "backgroundColor": "#F2C94C"
           }
         }
       ]
     ],
     "experiments": {
-      "typedRoutes": true,
+      "typedRoutes": false,
       "reactCompiler": true
     },
     "extra": {

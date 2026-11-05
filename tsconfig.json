@@ -10,8 +10,12 @@
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "app_legacy/**/*",
+    "src_old/**/*",
+    "constants_legacy*/**/*",
+    "node_modules/**/*"
   ]
 }

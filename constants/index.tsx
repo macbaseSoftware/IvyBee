@@ -1,6 +1,6 @@
 import { Platform } from 'react-native';
 
-export const API_URL = (process.env.EXPO_PUBLIC_API_URL ?? 'https://ivylearner-backend.onrender.com/api').replace(/\/$/, '');
+export const API_URL = (process.env.EXPO_PUBLIC_CRECHE_API_URL ?? 'http://localhost:5080/api/v1').replace(/\/$/, '');
 
 export const Colors = {
   primary: '#F2C94C',
