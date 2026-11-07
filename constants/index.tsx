@@ -1,6 +1,12 @@
 import { Platform } from 'react-native';
 
-export const API_URL = (process.env.EXPO_PUBLIC_CRECHE_API_URL ?? 'http://localhost:5080/api/v1').replace(/\/$/, '');
+const configuredApiUrl = process.env.EXPO_PUBLIC_CRECHE_API_URL ?? process.env.EXPO_PUBLIC_API_URL;
+
+if (!configuredApiUrl && !__DEV__) {
+  throw new Error('EXPO_PUBLIC_CRECHE_API_URL is required for production builds.');
+}
+
+export const API_URL = (configuredApiUrl ?? 'http://localhost:5080/api/v1').replace(/\/$/, '');
 
 export const Colors = {
   primary: '#F2C94C',
