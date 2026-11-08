@@ -13,6 +13,7 @@ export default function ParentLoginScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const enter = async (token: string, user: SignedInUser) => {
     setAuthToken(token);
@@ -22,15 +23,20 @@ export default function ParentLoginScreen() {
 
   const signIn = async () => {
     if (!email.trim() || !password) {
-      Alert.alert('Enter your details', 'Use the email address and password supplied by your school.');
+      const message = 'Enter the email address and password supplied by your school.';
+      setError(message);
+      if (Platform.OS !== 'web') Alert.alert('Enter your details', message);
       return;
     }
+    setError('');
     setLoading(true);
     try {
       const response = await api.login(email.trim().toLowerCase(), password);
       await enter(response.accessToken, response.user);
     } catch (error: any) {
-      Alert.alert('Could not sign in', error.message ?? 'Check your details and try again.');
+      const message = error.message ?? 'Check your details and try again.';
+      setError(message);
+      if (Platform.OS !== 'web') Alert.alert('Could not sign in', message);
     } finally {
       setLoading(false);
     }
@@ -54,6 +60,7 @@ export default function ParentLoginScreen() {
             <View style={styles.inputWrap}><Ionicons name="mail-outline" size={19} color={Colors.textMuted} /><TextInput style={styles.input} value={email} onChangeText={setEmail} autoCapitalize="none" keyboardType="email-address" placeholder="parent@example.com" placeholderTextColor={Colors.textMuted} /></View>
             <Text style={[styles.label, styles.passwordLabel]}>Password</Text>
             <View style={styles.inputWrap}><Ionicons name="lock-closed-outline" size={19} color={Colors.textMuted} /><TextInput style={styles.input} value={password} onChangeText={setPassword} secureTextEntry placeholder="Your password" placeholderTextColor={Colors.textMuted} onSubmitEditing={signIn} /></View>
+            {!!error && <Text style={styles.error}>{error}</Text>}
             <TouchableOpacity style={styles.primary} onPress={signIn} disabled={loading}>{loading ? <ActivityIndicator color={Colors.ink} /> : <><Text>Sign in</Text><Ionicons name="arrow-forward" size={19} color={Colors.ink} /></>}</TouchableOpacity>
             <View style={styles.divider}><View style={styles.dividerLine} /><Text style={styles.dividerText}>OR</Text><View style={styles.dividerLine} /></View>
             <TouchableOpacity style={styles.guest} onPress={() => router.push('/games')}>
@@ -81,6 +88,7 @@ const styles = StyleSheet.create({
   cardTitle: { color: Colors.ink, fontSize: 24, fontWeight: FontWeight.extrabold }, cardSubtitle: { marginTop: 4, marginBottom: 22, color: Colors.textSecondary, fontSize: FontSize.sm },
   label: { marginBottom: 7, color: Colors.ink, fontSize: 12, fontWeight: FontWeight.bold }, passwordLabel: { marginTop: 15 },
   inputWrap: { height: 52, paddingHorizontal: 13, flexDirection: 'row', alignItems: 'center', gap: 9, borderWidth: 1, borderColor: Colors.border, borderRadius: Radius.md, backgroundColor: Colors.cream }, input: { flex: 1, color: Colors.ink, fontSize: 15 },
+  error: { marginTop: 12, color: '#B42318', fontSize: 12, lineHeight: 17 },
   primary: { height: 54, marginTop: 20, paddingHorizontal: 17, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8, borderRadius: Radius.md, backgroundColor: Colors.primary },
   divider: { marginVertical: 18, flexDirection: 'row', alignItems: 'center', gap: 10 },
   dividerLine: { flex: 1, height: 1, backgroundColor: Colors.border }, dividerText: { color: Colors.textMuted, fontSize: 9, fontWeight: FontWeight.bold },
