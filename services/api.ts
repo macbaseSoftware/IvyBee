@@ -69,6 +69,32 @@ export interface ParentPayment {
   notes?: string;
 }
 
+export interface CollectorChild { id: number; name: string; studentNumber: string; }
+export interface AuthorizedCollector {
+  id: number; schoolId: number; fullName: string; relationship: string; phone?: string;
+  photoUrl?: string; identificationLabel?: string; validFrom?: string; validUntil?: string;
+  isActive: boolean; children: CollectorChild[];
+}
+export interface CollectionEvent {
+  id: number; schoolId: number; studentId: number; studentName: string; collectorId: number;
+  collectorName: string; collectorRelationship: string; collectedAt: string; isLate: boolean;
+  authorizedBy: string;
+}
+export interface SchoolBranding {
+  schoolId: number; schoolName: string; logoUrl?: string; address?: string; phone?: string;
+  email?: string; registrationNumber?: string; bankingDetails?: string; documentFooter?: string;
+}
+export interface StatementEntry {
+  date: string; kind: string; description: string; reference?: string;
+  debit: number; credit: number; balance: number;
+}
+export interface LearnerStatement {
+  statementNumber: string; school: SchoolBranding; studentId: number; studentNumber: string;
+  studentName: string; guardianName?: string; guardianEmail?: string; from: string; to: string;
+  openingBalance: number; closingBalance: number; totalCharges: number; totalPayments: number;
+  entries: StatementEntry[]; generatedAt: string;
+}
+
 type ApiEnvelope<T> = { statusCode: number; data: T; message?: string };
 
 let authToken: string | null = null;
@@ -105,6 +131,10 @@ export const api = {
   getGroups: () => request<CommunicationGroup[]>('GET', '/communication/groups'),
   getGroupPosts: (groupId: number) => request<CommunicationPost[]>('GET', `/communication/groups/${groupId}/posts`),
   getPayments: () => request<ParentPayment[]>('GET', '/parent/payments'),
+  getCollectors: () => request<AuthorizedCollector[]>('GET', '/parent/collectors'),
+  getCollections: () => request<CollectionEvent[]>('GET', '/parent/collections'),
+  getStatement: (studentId: number, from: string, to: string) =>
+    request<LearnerStatement>('GET', `/parent/statements/${studentId}?from=${from}&to=${to}`),
   emailReceipt: (paymentId: number) => request<{ message: string }>('POST', `/parent/payments/${paymentId}/email-receipt`),
   registerPushDevice: (expoPushToken: string, platform: 'ios' | 'android', deviceName?: string) =>
     request('POST', '/notifications/devices', { expoPushToken, platform, deviceName }),

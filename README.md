@@ -11,8 +11,10 @@ Ivybee is Ivy Brilliance's private school-to-family app for Android, iOS and web
 - child class groups;
 - teacher and school updates with photos;
 - private payment history and receipt email actions;
+- approved collector visibility and recent child collection history;
+- learner statement generation with PDF save/share;
 - native push-notification registration for Android and iOS;
-- a one-tap sample parent preview for demonstrations.
+- offline learning games that remain available without a family account.
 
 ## Run locally
 
@@ -21,7 +23,7 @@ npm install
 npx expo start
 ```
 
-Press `w` for the web preview, scan the QR code with Expo Go, or choose an available device simulator. On the welcome screen, choose **Preview the parent app**. No API connection is required for the demo parent.
+Press `w` for the web preview, scan the QR code with Expo Go, or choose an available device simulator. Sign in with a guardian account supplied by the school.
 
 Live email/password sign-in uses the Creche API. Configure it before starting Expo:
 
@@ -29,7 +31,7 @@ Live email/password sign-in uses the Creche API. Configure it before starting Ex
 $env:EXPO_PUBLIC_CRECHE_API_URL='http://localhost:5080/api/v1'
 ```
 
-On a physical phone, replace `localhost` with the development computer's local network address. The **Preview the parent app** option uses clearly labelled sample data and does not call the API.
+On a physical phone, replace `localhost` with the development computer's local network address.
 
 The app does not contain production child data, social provider secrets or real media. School administrators remain responsible for linking approved guardians to children.
 

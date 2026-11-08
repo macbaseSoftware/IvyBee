@@ -25,7 +25,9 @@ export default function TabsLayout() {
     }}>
       <Tabs.Screen name="home" options={{ title: 'Children', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'people' : 'people-outline'} focused={focused} /> }} />
       <Tabs.Screen name="groups" options={{ title: 'Groups', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'chatbubbles' : 'chatbubbles-outline'} focused={focused} /> }} />
-      <Tabs.Screen name="play" options={{ title: 'Play', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'game-controller' : 'game-controller-outline'} focused={focused} /> }} />
+      <Tabs.Screen name="safety" options={{ title: 'Collection', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'shield-checkmark' : 'shield-checkmark-outline'} focused={focused} /> }} />
+      <Tabs.Screen name="play" options={{ href: null }} />
+      <Tabs.Screen name="statements" options={{ href: null }} />
       <Tabs.Screen name="payments" options={{ title: 'Payments', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'receipt' : 'receipt-outline'} focused={focused} /> }} />
       <Tabs.Screen name="profile" options={{ title: 'Profile', tabBarIcon: ({ focused }) => <TabIcon name={focused ? 'person' : 'person-outline'} focused={focused} /> }} />
     </Tabs>
